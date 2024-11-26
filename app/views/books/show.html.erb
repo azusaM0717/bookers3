@@ -8,11 +8,10 @@
 
 <h1>Book detail</h1>
 <table>
-<%= image_tag @book.user.get_profile_image %>
-  <th><%= image_tag 'sample-user4.jpg' %></th>
-  <th><%= book.user.name %></th>
-  <th><%= book.title %></th>
-  <th><%= book.body %></th>
+<%= image_tag @book.user.get_profile_image(100,100) %>
+  <th><%= @book.user.name %></th>
+  <th><%= @book.title %></th>
+  <th><%= @book.body %></th>
 <% if @book.user == current_user %>
   <th><%= link_to "Edit", edit_book_path %></th>
   <th><%= link_to "Destroy", book_path(@book), method: :delete %></th>
