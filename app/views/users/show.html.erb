@@ -1,7 +1,10 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 
-<%= render 'users/info', user: @user %>
+<%= render 'info', user: @user %>
 
-<%= render 'new', book: @book %>
+<%= render 'books/new', book: @book %>
 
 <h1>Books</h1>
 <% @books.each do |book| %>
