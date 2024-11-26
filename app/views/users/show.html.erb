@@ -1,0 +1,17 @@
+
+<%= render 'users/info', user: @user %>
+
+<%= render 'new', book: @book %>
+
+<h1>Books</h1>
+<% @books.each do |book| %>
+  <table>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <%= book.title %>
+      <th>Opinion</th>
+      <%= book.body %>
+    </tr>
+  </table>
+<% end %>
