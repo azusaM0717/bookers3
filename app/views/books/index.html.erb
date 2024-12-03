@@ -1,24 +1,40 @@
-<%= render 'users/info', user: @user %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<%= render 'new', book: @book %>
+<div class="container">
+  <div class="row">
+  <div class="col-md-3">
+    <%= render 'users/info', user: @user %>
+    <%= render 'new', book: @book %>
+    </div>
+  <div class="col-md-8 offset-md-1">
 
 <h1>Books</h1>
-<% @books.each do |book| %>
-
 <table class="table">
   <thead>
     <tr>
-      <th scope="col"></th>
-      <th scope="col">Title</th>
-      <th scope="col">Opinion</th>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"><%= image_tag book.user.get_profile_image(100,100) %></th>
-      <td><%= book.title %></td>
-      <td><%= book.body %></td>
-    </tr>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= link_to user_path(book.user) do %>
+          <%= image_tag book.user.get_profile_image(100,100) %>
+          <% end %>
+        </td>
+        <td><%= link_to book.title, book_path(book.id) %></td>
+        <td><%= book.body %></td>
+        <td><%= render 'favorites/btn', book: book %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
-<% end %>

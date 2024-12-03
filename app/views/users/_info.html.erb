@@ -1,17 +1,7 @@
 <h1>User info</h1>
 
-<div>
-  <% if user.present? %>
-  <% if user.profile_image.attached? %>
-    <%= image_tag user.profile_image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "100x100" %>
-  <% end %>
-  <% end %>
-</div>
-
-<div>
-<table class="table">
+<table class="table-striped">
+  <tr><%= image_tag user.get_profile_image(100,100) %></tr>
   <tr>
     <th>name</th>
     <th><%= user.name %></th>
@@ -21,9 +11,9 @@
     <th><%= user.introduction %></th>
   </tr>
 </table>
-</div>
 
-<%= link_to edit_user_path(user) do %>
-  <button type="button" class="btn btn-outline-secondary btn-block"><i class="fa-solid fa-user-gear"></i>
-  </button>
+<div>
+<%= link_to edit_user_path(user.id), class: "btn btn-outline-secondary btn-block" do %>
+  <i class="fa-solid fa-user-gear"></i>
 <% end %>
+</div>
