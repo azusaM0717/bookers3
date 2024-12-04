@@ -8,7 +8,7 @@
 
 <h1>Book detail</h1>
 <table class='table'>
-  <tr>
+  <tr id="book_<%= @book.id %>">
     <td><%= link_to user_path(@book.user.id) do %>
       <%= image_tag @book.user.get_profile_image(100,100) %>
       <%= @book.user.name %>
@@ -16,11 +16,9 @@
     </td>
     <td><%= link_to @book.title, book_path(@book) %></td>
     <td><%= @book.body %></td>
-    <td id="favorite_btn_<%= @book.id %>">
-      <%= render 'favorites/btn', book: @book %>
-    </td>
-    <td>コメント数：<%= @book.book_comments.count %></td>
-    
+    <td class="favorite-btn"><%= render "favorites/btn", book: @book %></td>
+    <td class="comments-count">コメント数: <%= @book.book_comments.count %></td>
+
     <% if @book.user == current_user %>
     <td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %></td>
     <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか?", class: "btn btn-sm btn-danger" %></td>
@@ -28,7 +26,9 @@
   </tr>
 </table>  
 
-<%= render "book_comments/index", book: @book %>
+<div id="comment_index">
+  <%= render "book_comments/index", book: @book %>
+</div>
 <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
 </div>
 </div>
