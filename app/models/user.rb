@@ -17,12 +17,8 @@ class User < ApplicationRecord
   validates :introduction, length: { maximum: 50 }
 
 
-  def get_profile_image(width, height)
-    if profile_image.attached?
-      profile_image.variant(resize: "#{width}x#{height}")
-    else
-      'no_image.jpg'
-    end
+  def get_profile_image
+    (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
 
   def follow(user)
